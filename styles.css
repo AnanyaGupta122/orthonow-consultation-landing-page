@@ -1,0 +1,971 @@
+/* ==========================================================================
+   OrthoNow Design System (Mobile First)
+   ========================================================================== */
+
+/* 2. CSS Variables (:root) */
+:root {
+    /* Colors */
+    --color-primary: #0B2A4A;
+    --color-primary-hover: #081e35;
+    --color-accent: #FF6B57;
+    --color-accent-hover: #E55A47;
+    --color-background: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-text-primary: #1E293B;
+    --color-text-secondary: #64748B;
+    --color-border: #CBD5E1;
+    --color-error: #EF4444;
+    --color-disabled-bg: #E2E8F0;
+    --color-disabled-text: #94A3B8;
+
+    /* Typography */
+    --font-family-base: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+    /* Font Sizes (Mobile Base) */
+    --text-xs: 0.75rem;
+    /* 12px */
+    --text-sm: 0.875rem;
+    /* 14px */
+    --text-base: 1rem;
+    /* 16px */
+    --text-lg: 1.125rem;
+    /* 18px */
+    --text-xl: 1.25rem;
+    /* 20px */
+    --text-2xl: 1.5rem;
+    /* 24px */
+    --text-3xl: 1.75rem;
+    /* 28px */
+    --text-4xl: 2.25rem;
+    /* 36px */
+
+    /* Spacing (8px system) */
+    --space-05: 0.25rem;
+    /* 4px */
+    --space-1: 0.5rem;
+    /* 8px */
+    --space-2: 1rem;
+    /* 16px */
+    --space-3: 1.5rem;
+    /* 24px */
+    --space-4: 2rem;
+    /* 32px */
+    --space-6: 3rem;
+    /* 48px */
+    --space-8: 4rem;
+    /* 64px */
+    --space-12: 6rem;
+    /* 96px */
+
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    /* 4px */
+    --radius-md: 0.5rem;
+    /* 8px */
+    --radius-lg: 1rem;
+    /* 16px */
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+    /* Transitions */
+    --transition-fast: 0.15s ease-in-out;
+    --transition-base: 0.2s ease-in-out;
+}
+
+/* Responsive Desktop Overrides for Typography */
+@media (min-width: 1024px) {
+    :root {
+        --text-4xl: 3rem;
+        /* 48px H1 */
+        --text-3xl: 2.25rem;
+        /* 36px H2 */
+        --text-2xl: 1.5rem;
+        /* 24px H3 */
+    }
+}
+
+/* 1. CSS Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    line-height: 1.6;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+img,
+picture {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* 12. Motion Preferences (Prefers Reduced Motion) */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* 3. Typography System */
+body {
+    font-family: var(--font-family-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-background);
+    font-size: var(--text-base);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--color-text-primary);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-2);
+}
+
+h1 {
+    font-size: var(--text-4xl);
+}
+
+h2 {
+    font-size: var(--text-3xl);
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: var(--text-2xl);
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: var(--text-lg);
+    line-height: 1.5;
+    font-weight: 600;
+}
+
+p {
+    margin-bottom: var(--space-2);
+    color: var(--color-text-secondary);
+}
+
+/* 4. Global Styles */
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+/* 11. Accessibility Focus Styles */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* 5. Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 6. Container */
+.container {
+    width: 100%;
+    padding-left: var(--space-2);
+    padding-right: var(--space-2);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 10. Responsive Breakpoints - Container */
+@media (min-width: 768px) {
+    .container {
+        padding-left: var(--space-4);
+        padding-right: var(--space-4);
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        padding-left: var(--space-6);
+        padding-right: var(--space-6);
+    }
+}
+
+/* 7. Buttons */
+.submit-btn,
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    font-weight: 700;
+    font-size: var(--text-base);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+    /* Mobile First Full Width */
+}
+
+.submit-btn:hover,
+.btn-primary:hover {
+    background-color: var(--color-accent-hover);
+    box-shadow: var(--shadow-lg);
+    transform: scale(1.02);
+}
+
+.submit-btn:disabled,
+.btn-primary:disabled {
+    background-color: var(--color-disabled-bg);
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* 10. Responsive Breakpoints - Buttons */
+@media (min-width: 768px) {
+
+    .submit-btn,
+    .btn-primary {
+        width: auto;
+        /* Buttons adapt to content on larger screens by default */
+    }
+}
+
+/* 8. Form Controls */
+.form-group {
+    margin-bottom: var(--space-2);
+}
+
+.form-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-05);
+}
+
+.form-input {
+    width: 100%;
+    height: 52px;
+    /* Minimum mobile touch target */
+    padding: 0 var(--space-2);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input::placeholder {
+    color: var(--color-text-secondary);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+.form-input.error {
+    border-color: var(--color-error);
+}
+
+/* 9. Card Component */
+.card,
+.consultation-card,
+.specialist-card,
+.testimonial-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-3);
+    height: 100%;
+}
+
+/* ==========================================================================
+   Global Layout System
+   ========================================================================== */
+
+/* 1. Section Spacing */
+section {
+    padding-top: var(--space-4);
+    padding-bottom: var(--space-4);
+}
+
+@media (min-width: 768px) {
+    section {
+        padding-top: var(--space-6);
+        padding-bottom: var(--space-6);
+    }
+}
+
+/* 2. Flex Utility Classes */
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.justify-content-center {
+    justify-content: center;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.align-items-start {
+    align-items: flex-start;
+}
+
+.gap-1 {
+    gap: var(--space-1);
+}
+
+.gap-2 {
+    gap: var(--space-2);
+}
+
+.gap-3 {
+    gap: var(--space-3);
+}
+
+.gap-4 {
+    gap: var(--space-4);
+}
+
+/* 3. Grid Utility Classes */
+.d-grid {
+    display: grid;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-gap-2 {
+    gap: var(--space-2);
+}
+
+.grid-gap-3 {
+    gap: var(--space-3);
+}
+
+.grid-gap-4 {
+    gap: var(--space-4);
+}
+
+@media (min-width: 768px) {
+    .md-grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .md-grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg-grid-cols-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .lg-grid-cols-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .lg-grid-cols-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+}
+
+/* 4. Responsive Layout Helpers */
+.d-block {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .md-d-block {
+        display: block;
+    }
+
+    .md-d-none {
+        display: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .lg-d-block {
+        display: block;
+    }
+
+    .lg-d-none {
+        display: none;
+    }
+}
+
+/* 5. Alignment Helpers */
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+@media (min-width: 768px) {
+    .md-text-left {
+        text-align: left;
+    }
+
+    .md-text-center {
+        text-align: center;
+    }
+}
+
+/* 6. Max-width Behavior */
+.max-w-xs {
+    max-width: 20rem;
+    margin-inline: auto;
+}
+
+.max-w-sm {
+    max-width: 24rem;
+    margin-inline: auto;
+}
+
+.max-w-md {
+    max-width: 28rem;
+    margin-inline: auto;
+}
+
+.max-w-lg {
+    max-width: 32rem;
+    margin-inline: auto;
+}
+
+.max-w-xl {
+    max-width: 36rem;
+    margin-inline: auto;
+}
+
+.max-w-2xl {
+    max-width: 42rem;
+    margin-inline: auto;
+}
+
+.max-w-full {
+    max-width: 100%;
+}
+
+/* 7. Image Responsiveness */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* 8. List Reset */
+.list-unstyled {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+/* 9. Sticky Header Behavior */
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+/* 10. Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+    /* Offset scroll to account for sticky header */
+    scroll-padding-top: 80px;
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+
+/* 13. Gradient background & 14. Accessible contrast */
+.hero-section {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #153f65 100%);
+    color: var(--color-surface);
+    position: relative;
+    overflow: hidden;
+}
+
+/* 1. Responsive Hero Layout (8. Mobile-first) */
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    align-items: center;
+}
+
+/* 9. Tablet layout */
+@media (min-width: 768px) {
+    .hero-container {
+        gap: var(--space-8);
+    }
+}
+
+/* 10. Desktop layout */
+@media (min-width: 1024px) {
+    .hero-container {
+        grid-template-columns: 1fr 400px;
+        gap: var(--space-8);
+    }
+}
+
+/* 2. Headline */
+.hero-headline {
+    color: var(--color-surface);
+    margin-bottom: var(--space-3);
+}
+
+/* 3. Subheadline */
+.hero-subheadline {
+    color: var(--color-surface);
+    opacity: 0.9;
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-4);
+    max-width: 600px;
+}
+
+/* 4. Three Trust Chips */
+.hero-trust-chips {
+    margin-top: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.trust-chip {
+    display: inline-flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-lg);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+/* 11. Smooth hover interactions */
+.trust-chip:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* 5. Booking Card */
+.booking-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-lg);
+}
+
+.booking-title {
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+    text-align: center;
+}
+
+.booking-card .trust-text {
+    color: var(--color-text-secondary);
+    margin-top: var(--space-2);
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   UI Refinements & Components
+   ========================================================================== */
+
+/* Typography Utils */
+.text-primary {
+    color: var(--color-primary);
+}
+
+.text-secondary {
+    color: var(--color-text-secondary);
+}
+
+.text-surface {
+    color: var(--color-surface);
+}
+
+.text-accent {
+    color: var(--color-accent);
+}
+
+.font-weight-bold {
+    font-weight: 700;
+}
+
+.font-italic {
+    font-style: italic;
+}
+
+/* Background Utils */
+.bg-primary {
+    background-color: var(--color-primary);
+}
+
+.bg-light {
+    background-color: var(--color-background);
+}
+
+.bg-surface {
+    background-color: var(--color-surface);
+}
+
+/* Spacing Utils */
+.m-0 {
+    margin: 0;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mb-1 {
+    margin-bottom: var(--space-1);
+}
+
+.mb-2 {
+    margin-bottom: var(--space-2);
+}
+
+.mb-3 {
+    margin-bottom: var(--space-3);
+}
+
+.mb-4 {
+    margin-bottom: var(--space-4);
+}
+
+.p-0 {
+    padding: 0 !important;
+}
+
+.p-3 {
+    padding: var(--space-3);
+}
+
+.p-4 {
+    padding: var(--space-4);
+}
+
+.pt-0 {
+    padding-top: 0;
+}
+
+.pt-3 {
+    padding-top: var(--space-3);
+}
+
+.pt-6 {
+    padding-top: var(--space-6);
+}
+
+.pb-4 {
+    padding-bottom: var(--space-4);
+}
+
+/* Opacity Utils */
+.opacity-60 {
+    opacity: 0.6;
+}
+
+.opacity-80 {
+    opacity: 0.8;
+}
+
+.hover-opacity-100 {
+    transition: opacity var(--transition-base);
+}
+
+.hover-opacity-100:hover {
+    opacity: 1;
+}
+
+/* Border Utils */
+.border-top {
+    border-top: 1px solid var(--color-border);
+}
+
+.border-light {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* SVG Icons */
+.metric-icon,
+.symptom-icon,
+.benefit-icon {
+    color: var(--color-accent);
+    margin-bottom: var(--space-2);
+    display: block;
+}
+
+.warning-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Doctor Profile */
+.specialist-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--color-background);
+    box-shadow: var(--shadow-md);
+}
+
+/* FAQ Accordion (No JS) */
+details.faq-item {
+    transition: background-color var(--transition-fast);
+}
+
+details.faq-item summary {
+    cursor: pointer;
+    list-style: none;
+    /* Hide default arrow */
+    position: relative;
+    padding-right: var(--space-4);
+}
+
+details.faq-item summary::-webkit-details-marker {
+    display: none;
+    /* Hide default arrow in WebKit */
+}
+
+details.faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: var(--space-3);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    transition: transform var(--transition-base);
+}
+
+details.faq-item[open] summary::after {
+    content: "−";
+    /* Minus sign */
+}
+
+details.faq-item[open] {
+    border-color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Form Validation & States
+   ========================================================================== */
+
+.is-invalid {
+    border-color: var(--color-error) !important;
+}
+
+.is-invalid:focus {
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2) !important;
+}
+
+.error-message {
+    color: var(--color-error);
+    font-size: var(--text-sm);
+    margin-top: var(--space-05);
+    display: block;
+}
+
+.success-message {
+    background-color: #ecfdf5;
+    /* Tailwind emerald-50 */
+    color: #065f46;
+    /* Tailwind emerald-900 */
+    border: 1px solid #a7f3d0;
+    /* Tailwind emerald-200 */
+    padding: var(--space-4);
+    border-radius: var(--radius-base);
+    text-align: center;
+}
+
+.success-message h3 {
+    margin-bottom: var(--space-2);
+    color: #064e3b;
+    /* Tailwind emerald-950 */
+}
+
+.submit-btn:disabled {
+    background-color: var(--color-disabled-bg);
+    color: var(--color-disabled-text);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.site-logo {
+    width: 245px;
+    height: auto;
+    display: block;
+}
+
+.site-header {
+    padding: 4px 0;
+    background-color: var(--color-surface);
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-contact {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.call-text {
+    display: none;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+    .call-text {
+        display: inline;
+    }
+}
+
+.call-link {
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.call-link:hover {
+    color: var(--color-accent);
+}
+
+.logo-link {
+    display: inline-flex;
+    align-items: center;
+}
